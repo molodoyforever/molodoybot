@@ -2,8 +2,11 @@ from os import name
 from sys import prefix
 import discord
 from discord import activity
+from discord import channel
+from discord.channel import VoiceChannel
 from discord.ext import commands
 from discord.message import Message
+from discord.utils import get
 
 client = commands.Bot( command_prefix = "!!")
 client.remove_command("help")
@@ -13,14 +16,13 @@ async def on_ready():
     await client.change_presence( status = discord.Status.idle, activity = discord.Game("Жизнь"))
 
 #привки
-hello_world = [ "hi", "Hi", "Hello", "Привет", "привет", "Хелоу", "ку", "Ку", "Здарова", "здравствуй", "Здравствуй"]
-answer_words = [ "узнать о сервере", "что тут делать?", "команды", "чем тут занятся?", "Узнать о сервере", "Что тут делать?", "команды" ]
-poka = [ "спокойной ночи", "сладких снов", "до завтра", "до встречи", "я спать", "иду спать",
-        "Спокойной ночи", "Сладких снов", "До завтра", "До встречи", "Я спать", "Иду спать"]
+hello_world = [ "hi", "Hello", "Привет", "Хелоу", "ку", "Здарова", "Здравствуй"]
+answer_words = [ "узнать о сервере", "что тут делать?", "команды", "чем тут занятся?" ]
+poka = [ "спокойной ночи", "сладких снов", "до завтра", "до встречи", "я спать", "иду спать" ]
 
 @client.command( pass_context = True)
 
-async def say (ctx, arg):
+async def say (ctx, *, arg):
     author = ctx.message.author
     await ctx.channel.purge(limit = 1)
     await ctx.send ( arg )
@@ -88,7 +90,12 @@ async def unban( ctx, *, member ):
 async def help( ctx ):
     emb = discord.Embed(title = "Навигация по командам")
 
+    emb.add_field(name = "!!help", value = "Это сообщение" )
+    emb.add_field(name = "!!say", value = "Фраза от имени бота" )
     emb.add_field(name = "!!clear", value = "Очистка чата" )
+    emb.add_field(name = "!!join", value = "Пригласить бота в голосовой канал" )
+    emb.add_field(name = "!!leave", value = "Выгнать бота с голосового канала" )
+    emb.add_field(name = "!!mute/!!unmute", value = "Ограничить участника в правах на сервере" )
     emb.add_field(name = "!!kick", value = "Выгнать участника сервера" )
     emb.add_field(name = "!!ban", value = "Забанить участника" )
     emb.add_field(name = "!!unban", value = "Вернуть доступ к серверу" )
@@ -116,6 +123,35 @@ async def unmute(ctx, member:discord.Member):
     mute_role = discord.utils.get(ctx.message.guild.roles, name='MUTE')
 
     await member.remove_roles(mute_role)
+
+#присоединение 
+@client.command()
+
+async def join( ctx ):
+    global voice
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild = ctx.guild)
+    
+    if voice and voice.is_connected():
+        await voice.move_to(channel)
+    
+    else:
+        voice = await channel.connect()
+
+#отсоединиться 
+
+@client.command()
+
+async def leave( ctx ):
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild = ctx.guild)
+    
+    if voice and voice.is_connected():
+        await voice.disconnect()
+    
+    else:
+        voice = await channel.connect()
+
 
 token = open("token.txt", "r").readline()
 
