@@ -101,6 +101,7 @@ async def хелп( ctx ):
     emb.add_field(name = "+поцеловать", value = "RP:Поцеловать участника сервера" )
     emb.add_field(name = "+убить", value = "RP:Убить участника сервера" )
     emb.add_field(name = "+лизнуть", value = "RP:Лизнуть участника сервера" )
+    emb.add_field(name = "+тыкнуть", value = "RP:Тыкнуть участника сервера" )
     emb.add_field(name = "+курить", value = "RP:Покурить" )
     emb.add_field(name = "+мьют/+размьют", value = "Ограничить участника в правах на сервере" )
     emb.add_field(name = "+выгнать", value = "Выгнать участника сервера" )
