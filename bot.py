@@ -22,7 +22,7 @@ poka = [ "спокойной ночи", "сладких снов", "до зав�
 
 @client.command( pass_context = True)
 
-async def say (ctx, *, arg):
+async def сказать (ctx, *, arg):
     author = ctx.message.author
     await ctx.channel.purge(limit = 1)
     await ctx.send ( arg )
@@ -46,14 +46,14 @@ async def on_message( message ):
 @client.command( pass_context = True)
 @commands.has_permissions( administrator = True )
 
-async def clear(ctx, amount = 20):
+async def очистить(ctx, amount = 20):
     await ctx.channel.purge( limit = amount )
 
 #kick
 @client.command( pass_context = True)
 @commands.has_permissions( administrator = True )
 
-async def kick(ctx, member: discord.Member, *, reason = None ):
+async def выгнать(ctx, member: discord.Member, *, reason = None ):
     await ctx.channel.purge(limit = 1)
 
     await member.kick(reason = reason)
@@ -63,7 +63,7 @@ async def kick(ctx, member: discord.Member, *, reason = None ):
 @client.command( pass_context = True)
 @commands.has_permissions( administrator = True )
 
-async def ban(ctx, member: discord.Member, *, reason = None ):
+async def бан(ctx, member: discord.Member, *, reason = None ):
     await ctx.channel.purge(limit = 1)
 
     await member.ban(reason = reason)
@@ -72,7 +72,7 @@ async def ban(ctx, member: discord.Member, *, reason = None ):
 @client.command( pass_context = True)
 @commands.has_permissions( administrator = True )
 
-async def unban( ctx, *, member ):
+async def разбан( ctx, *, member ):
     await ctx.channel.purge(limit = 1)
 
     banned_users = await ctx.guild.bans()
@@ -87,23 +87,21 @@ async def unban( ctx, *, member ):
 
 #help
 @client.command( pass_context = True)
-async def help( ctx ):
+async def хелп( ctx ):
     emb = discord.Embed(title = "Навигация по командам")
 
-    emb.add_field(name = "+help", value = "Это сообщение" )
-    emb.add_field(name = "+say", value = "Фраза от имени бота" )
-    emb.add_field(name = "+clear", value = "Очистка чата" )
+    emb.add_field(name = "+хелп", value = "Это сообщение" )
+    emb.add_field(name = "+сказать", value = "Фраза от имени бота" )
+    emb.add_field(name = "+очистить", value = "Очистка чата" )
     emb.add_field(name = "+обнять", value = "RP:Обнять участника сервера" )
     emb.add_field(name = "+поцеловать", value = "RP:Поцеловать участника сервера" )
     emb.add_field(name = "+убить", value = "RP:Убить участника сервера" )
     emb.add_field(name = "+лизнуть", value = "RP:Лизнуть участника сервера" )
     emb.add_field(name = "+курить", value = "RP:Покурить" )
-    emb.add_field(name = "+join", value = "Пригласить бота в голосовой канал" )
-    emb.add_field(name = "+leave", value = "Выгнать бота с голосового канала" )
-    emb.add_field(name = "+mute/+unmute", value = "Ограничить участника в правах на сервере" )
-    emb.add_field(name = "+kick", value = "Выгнать участника сервера" )
-    emb.add_field(name = "+ban", value = "Забанить участника" )
-    emb.add_field(name = "+unban", value = "Вернуть доступ к серверу" )
+    emb.add_field(name = "+мьют/+размьют", value = "Ограничить участника в правах на сервере" )
+    emb.add_field(name = "+выгнать", value = "Выгнать участника сервера" )
+    emb.add_field(name = "+бан", value = "Забанить участника" )
+    emb.add_field(name = "+разбан", value = "Вернуть доступ к серверу" )
     
     await ctx.send( embed = emb )
 
@@ -111,7 +109,7 @@ async def help( ctx ):
 @client.command()
 @commands.has_permissions( administrator = True )
 
-async def mute(ctx, member: discord.Member ):
+async def мьют(ctx, member: discord.Member ):
     await ctx.channel.purge(limit = 1)
 
     mute_role = discord.utils.get(ctx.message.guild.roles, name = "MUTE")
@@ -122,7 +120,7 @@ async def mute(ctx, member: discord.Member ):
 @client.command()
 @commands.has_permissions(administrator=True)
 
-async def unmute(ctx, member:discord.Member):
+async def размьют(ctx, member:discord.Member):
     await ctx.channel.purge(limit=1)
 
     mute_role = discord.utils.get(ctx.message.guild.roles, name='MUTE')
