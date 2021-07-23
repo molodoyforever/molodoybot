@@ -19,6 +19,7 @@ async def on_ready():
 hello_world = [ "hi", "Hello", "Привет", "Хелоу", "ку", "Здарова", "Здравствуй"]
 answer_words = [ "узнать о сервере", "что тут делать?", "команды", "чем тут занятся?" ]
 poka = [ "спокойной ночи", "сладких снов", "до завтра", "до встречи", "я спать", "иду спать" ]
+zabavi = ["админы норм?"]
 
 @client.command( pass_context = True)
 
@@ -37,10 +38,13 @@ async def on_message( message ):
         await message.channel.send("Привет, чего хотел?")
     
     if msg in answer_words:
-        await message.channel.send("Пропиши команду !!help для подробной информации.")
+        await message.channel.send("Пропиши команду +хелп для подробной информации.")
     
     if msg in poka:
         await message.channel.send("Надеюсь, увидимся ещё!")
+
+    if msg in zabavi:
+        await message.channel.send("Мой создатель лучший на свете!)")
 
 #удалим сообщения
 @client.command( pass_context = True)
@@ -237,6 +241,22 @@ async def курить( ctx, *, Notes):
     "https://i.gifer.com/1fTa.gif"]
     embed = discord.Embed(description = f"{ctx.message.author.mention} покурил, {Notes}")
     embed.set_image(url=random.choice(smokeGifs))
+
+    await ctx.send(embed=embed)
+
+#тыкнуть 
+@client.command()
+
+async def тыкнуть( ctx, user: discord.User, *, Notes):
+    await ctx.channel.purge(limit = 1)
+    pokeGifs = ["https://i.gifer.com/FK0b.gif",
+    "https://i.gifer.com/S00v.gif",
+    "https://i.gifer.com/Lqge.gif",
+    "https://i.gifer.com/SKql.gif",
+    "https://i.gifer.com/QIzc.gif",
+    "https://i.gifer.com/HlJ6.gif"]
+    embed = discord.Embed(description = f"{ctx.message.author.mention} тыкнул(а) {user.mention}, {Notes}")
+    embed.set_image(url=random.choice(pokeGifs))
 
     await ctx.send(embed=embed)
 
