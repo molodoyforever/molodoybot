@@ -105,8 +105,7 @@ async def хелп( ctx ):
     emb.add_field(name = "+курить", value = "RP:Покурить" )
     emb.add_field(name = "+мьют/+размьют", value = "Ограничить участника в правах на сервере" )
     emb.add_field(name = "+выгнать", value = "Выгнать участника сервера" )
-    emb.add_field(name = "+бан", value = "Забанить участника" )
-    emb.add_field(name = "+разбан", value = "Вернуть доступ к серверу" )
+    emb.add_field(name = "+бан/+разбан", value = "Забанить/Разбанить участника" )
     
     await ctx.send( embed = emb )
 
