@@ -1,8 +1,13 @@
+
+import asyncio
 import random
+from re import U
 from sys import prefix
 import discord
 from discord import activity
 from discord import channel
+from discord import embeds
+from discord import colour
 from discord.channel import VoiceChannel
 from discord.ext import commands
 from discord.message import Message
@@ -95,6 +100,7 @@ async def хелп( ctx ):
     emb = discord.Embed(title = "Навигация по командам")
 
     emb.add_field(name = "+хелп", value = "Это сообщение" )
+    emb.add_field(name = "+аватар", value = "Запросить свой/участника аватар" )
     emb.add_field(name = "+сказать", value = "Фраза от имени бота" )
     emb.add_field(name = "+очистить", value = "Очистка чата" )
     emb.add_field(name = "+обнять", value = "RP:Обнять участника сервера" )
@@ -257,6 +263,21 @@ async def тыкнуть( ctx, user: discord.User, *, Notes):
     "https://i.gifer.com/HlJ6.gif"]
     embed = discord.Embed(description = f"{ctx.message.author.mention} тыкнул(а) {user.mention}, {Notes}")
     embed.set_image(url=random.choice(pokeGifs))
+
+    await ctx.send(embed=embed)
+
+#аватар
+@client.command()
+async def аватар(ctx, *, member: discord.Member=None):
+    await ctx.channel.purge(limit = 1)
+    if not member:
+        member=ctx.message.author
+    userAvatar = member.avatar_url
+
+    embed=discord.Embed(colour=member.color, timestamp=ctx.message.created_at)
+    embed.set_author(name=f"Аватар {member}")
+    embed.set_image(url=member.avatar_url)
+    embed.set_footer(text=f"Запрошено {ctx.author}", icon_url=ctx.author.avatar_url)
 
     await ctx.send(embed=embed)
 
