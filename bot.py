@@ -266,6 +266,21 @@ async def тыкнуть( ctx, user: discord.User, *, Notes):
 
     await ctx.send(embed=embed)
 
+#погладить 
+@client.command()
+
+async def погладить( ctx, user: discord.User, *, Notes):
+    await ctx.channel.purge(limit = 1)
+    patGifs = ["https://i.gifer.com/KJ42.gif",
+    "https://i.gifer.com/AWA3.gif",
+    "https://i.gifer.com/GJor.gif",
+    "https://i.gifer.com/Ckuy.gif",
+    "https://i.gifer.com/fybn.gif"]
+    embed = discord.Embed(description = f"{ctx.message.author.mention} погладил(а) {user.mention}, {Notes}")
+    embed.set_image(url=random.choice(patGifs))
+
+    await ctx.send(embed=embed)
+
 #аватар
 @client.command()
 async def аватар(ctx, *, member: discord.Member=None):
