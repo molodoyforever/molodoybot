@@ -193,7 +193,8 @@ async def поцеловать( ctx, user: discord.User, *, Notes):
     "https://media.giphy.com/media/zkppEMFvRX5FC/giphy.gif",
     "https://media.giphy.com/media/FqBTvSNjNzeZG/giphy.gif",
     "https://media.giphy.com/media/dP8ONh1mN8YWQ/giphy.gif",
-    "https://i.gifer.com/2lte.gif"]
+    "https://i.gifer.com/2lte.gif",
+    "https://i.gifer.com/2ltq.gif"]
     embed = discord.Embed(description = f"{ctx.message.author.mention} поцеловал(а) {user.mention}, {Notes}")
     embed.set_image(url=random.choice(kissGifs))
 
@@ -288,13 +289,11 @@ async def погладить( ctx, user: discord.User, *, Notes):
 
 async def укусить( ctx, user: discord.User, *, Notes):
     await ctx.channel.purge(limit = 1)
-    biteGifs = ["https://tenor.com/IHEh.gif",
-    "https://tenor.com/4sAB.gif",
-    "https://tenor.com/bcpbu.gif",
-    "https://tenor.com/bmwwg.gif",
-    "https://tenor.com/Yud6.gif",
-    "https://tenor.com/tMQe.gif",
-    "https://tenor.com/39cJ.gif"]
+    biteGifs = ["https://c.tenor.com/8UjO54apiUIAAAAC/gjbu-bite.gif",
+    "https://media.giphy.com/media/4JpvyNYuyf0aI/giphy.gif?cid=ecf05e47nz2s4iss30wam7io9e2m7lbti0tmx1wt5wnx8o06&rid=giphy.gif&ct=g",
+    "https://i.gifer.com/H3Jt.gif",
+    "https://animesher.com/orig/0/94/941/9418/animesher.com_bite-gif-image-vampire-knight-941852.gif",
+    "https://animesher.com/orig/0/83/836/8362/animesher.com_gif-funny-girl-836208.gif"]
     embed = discord.Embed(description = f"{ctx.message.author.mention} укусил(а) {user.mention}, {Notes}")
     embed.set_image(url=random.choice(biteGifs))
 
