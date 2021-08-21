@@ -109,6 +109,7 @@ async def хелп( ctx ):
     emb.add_field(name = "`+лизнуть`", value = "```RP:Лизнуть участника сервера```" )
     emb.add_field(name = "`+погладить`", value = "```RP:Погладить участника сервера```" )
     emb.add_field(name = "`+тыкнуть`", value = "```RP:Тыкнуть участника сервера```" )
+    emb.add_field(name = "`+укусить`", value = "```RP:Укусить участника сервера```" )
     emb.add_field(name = "`+курить`", value = "```RP:Покурить```" )
     emb.add_field(name = "`+мьют/+размьют`", value = "```Ограничить участника в правах на сервере```" )
     emb.add_field(name = "`+выгнать`", value = "```Выгнать участника сервера```" )
@@ -279,6 +280,23 @@ async def погладить( ctx, user: discord.User, *, Notes):
     "https://i.gifer.com/fybn.gif"]
     embed = discord.Embed(description = f"{ctx.message.author.mention} погладил(а) {user.mention}, {Notes}")
     embed.set_image(url=random.choice(patGifs))
+
+    await ctx.send(embed=embed)
+
+#укусить 
+@client.command()
+
+async def укусить( ctx, user: discord.User, *, Notes):
+    await ctx.channel.purge(limit = 1)
+    biteGifs = ["https://tenor.com/IHEh.gif",
+    "https://tenor.com/4sAB.gif",
+    "https://tenor.com/bcpbu.gif",
+    "https://tenor.com/bmwwg.gif",
+    "https://tenor.com/Yud6.gif",
+    "https://tenor.com/tMQe.gif",
+    "https://tenor.com/39cJ.gif"]
+    embed = discord.Embed(description = f"{ctx.message.author.mention} укусил(а) {user.mention}, {Notes}")
+    embed.set_image(url=random.choice(biteGifs))
 
     await ctx.send(embed=embed)
 
