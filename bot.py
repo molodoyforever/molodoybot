@@ -26,6 +26,7 @@ answer_words = [ "узнать о сервере", "что тут делать?"
 poka = [ "спокойной ночи", "сладких снов", "до завтра", "до встречи", "я спать", "иду спать" ]
 zabavi = ["админы норм?"]
 
+#сказать
 @client.command( pass_context = True)
 
 async def сказать (ctx, *, arg):
@@ -58,42 +59,6 @@ async def on_message( message ):
 async def очистить(ctx, amount = 20):
     await ctx.channel.purge( limit = amount )
 
-#kick
-@client.command( pass_context = True)
-@commands.has_permissions( administrator = True )
-
-async def выгнать(ctx, member: discord.Member, *, reason = None ):
-    await ctx.channel.purge(limit = 1)
-
-    await member.kick(reason = reason)
-    await ctx.send( f"User { member.mention } kicked" )
-
-#ban
-@client.command( pass_context = True)
-@commands.has_permissions( administrator = True )
-
-async def бан(ctx, member: discord.Member, *, reason = None ):
-    await ctx.channel.purge(limit = 1)
-
-    await member.ban(reason = reason)
-    await ctx.send( f"User { member.mention } banned" )
-#unban
-@client.command( pass_context = True)
-@commands.has_permissions( administrator = True )
-
-async def разбан( ctx, *, member ):
-    await ctx.channel.purge(limit = 1)
-
-    banned_users = await ctx.guild.bans()
-
-    for ban_entry in banned_users:
-        member = ban_entry.user
-
-        await ctx.guild.unban( member )
-        await ctx.send( f"User { member.mention } unbanned" )
-
-        return
-
 #help
 @client.command( pass_context = True)
 async def хелп( ctx ):
@@ -111,33 +76,8 @@ async def хелп( ctx ):
     emb.add_field(name = "`+тыкнуть`", value = "```RP:Тыкнуть участника сервера```" )
     emb.add_field(name = "`+укусить`", value = "```RP:Укусить участника сервера```" )
     emb.add_field(name = "`+курить`", value = "```RP:Покурить```" )
-    emb.add_field(name = "`+мьют/+размьют`", value = "```Ограничить участника в правах на сервере```" )
-    emb.add_field(name = "`+выгнать`", value = "```Выгнать участника сервера```" )
-    emb.add_field(name = "`+бан/+разбан`", value = "```Забанить/Разбанить участника```" )
     
     await ctx.send( embed = emb )
-
-#mute
-@client.command()
-@commands.has_permissions( administrator = True )
-
-async def мьют(ctx, member: discord.Member ):
-    await ctx.channel.purge(limit = 1)
-
-    mute_role = discord.utils.get(ctx.message.guild.roles, name = "MUTE")
-
-    await member.add_roles(mute_role)
-
-#unmute
-@client.command()
-@commands.has_permissions(administrator=True)
-
-async def размьют(ctx, member:discord.Member):
-    await ctx.channel.purge(limit=1)
-
-    mute_role = discord.utils.get(ctx.message.guild.roles, name='MUTE')
-
-    await member.remove_roles(mute_role)
 
 #присоединение 
 @client.command()
@@ -175,7 +115,9 @@ async def обнять( ctx, user: discord.User, *, Notes):
     hugGifs = ["https://media.giphy.com/media/svXXBgduBsJ1u/giphy.gif",
     "https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif",
     "https://media.giphy.com/media/du8yT5dStTeMg/giphy.gif",
-    "https://media.giphy.com/media/u9BxQbM5bxvwY/giphy.gif"]
+    "https://media.giphy.com/media/u9BxQbM5bxvwY/giphy.gif",
+    "https://c.tenor.com/Q83w83J1VzUAAAAC/hug-love.gif",
+    "https://c.tenor.com/c8M8yU1q6c4AAAAC/hug-anime.gif"]
     embed = discord.Embed(description = f"{ctx.message.author.mention} обнял(а) {user.mention}, {Notes}")
     embed.set_image(url=random.choice(hugGifs))
 
@@ -293,7 +235,10 @@ async def укусить( ctx, user: discord.User, *, Notes):
     "https://media.giphy.com/media/4JpvyNYuyf0aI/giphy.gif?cid=ecf05e47nz2s4iss30wam7io9e2m7lbti0tmx1wt5wnx8o06&rid=giphy.gif&ct=g",
     "https://i.gifer.com/H3Jt.gif",
     "https://animesher.com/orig/0/94/941/9418/animesher.com_bite-gif-image-vampire-knight-941852.gif",
-    "https://animesher.com/orig/0/83/836/8362/animesher.com_gif-funny-girl-836208.gif"]
+    "https://animesher.com/orig/0/83/836/8362/animesher.com_gif-funny-girl-836208.gif",
+    "https://c.tenor.com/4j3hMz-dUz0AAAAC/anime-love.gif",
+    "https://c.tenor.com/5FOgNEcoaYMAAAAC/neck-kisses.gif"
+    "https://c.tenor.com/1LtA9dSoAIQAAAAC/zero-no-tsukaima-bite.gif"]
     embed = discord.Embed(description = f"{ctx.message.author.mention} укусил(а) {user.mention}, {Notes}")
     embed.set_image(url=random.choice(biteGifs))
 
