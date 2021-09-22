@@ -190,7 +190,7 @@ async def курить( ctx, *, Notes):
     "https://i.gifer.com/74G.gif",
     "https://i.gifer.com/2qvr.gif",
     "https://i.gifer.com/1fTa.gif"]
-    embed = discord.Embed(description = f"{ctx.message.author.mention} покурил, {Notes}")
+    embed = discord.Embed(description = f"{ctx.message.author.mention} покурил(а), {Notes}")
     embed.set_image(url=random.choice(smokeGifs))
 
     await ctx.send(embed=embed)
